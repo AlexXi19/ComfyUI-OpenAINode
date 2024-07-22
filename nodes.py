@@ -116,7 +116,7 @@ class TextWithPrompt:
                 {
                     "role": "user",
                     "content": [
-                        {"type": "text", "text": prompt + text},
+                        {"type": "text", "text": prompt + "\n" + text},
                     ],
                 }
             ],
