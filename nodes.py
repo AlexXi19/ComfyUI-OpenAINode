@@ -20,6 +20,14 @@ class ImageWithPrompt:
                     },
                 ),
                 "max_tokens": ("INT", {"min": 1, "max": 2048, "default": 77}),
+                "model": (
+                    [
+                        "gpt-4o",
+                        "gpt-4o-mini",
+                        "gpt-4-turbo",
+                    ],
+                    {},
+                ),
             }
         }
 
@@ -34,11 +42,11 @@ class ImageWithPrompt:
         )
 
     def generate_completion(
-        self, Image: torch.Tensor, prompt: str, max_tokens: int
+        self, Image: torch.Tensor, prompt: str, max_tokens: int, model: str
     ) -> Tuple[str]:
         b64image = image.pil2base64(image.tensor2pil(Image))
         response = self.open_ai_client.chat.completions.create(
-            model="gpt-4-vision-preview",
+            model=model,
             max_tokens=max_tokens,
             messages=[
                 {
