@@ -28,6 +28,10 @@ class ImageWithPrompt:
                     ],
                     {},
                 ),
+                "api_key": (
+                    "STRING",
+                    {"multiline": False, "default": ""},
+                ),
             }
         }
 
@@ -36,10 +40,9 @@ class ImageWithPrompt:
 
     CATEGORY = "OpenAI"
 
-    def __init__(self):
-        self.open_ai_client: OpenAIClient = OpenAIClient(
-            api_key=credentials.get_open_ai_api_key()
-        )
+    def __init__(self, api_key: str = ""):
+        api_key = api_key or credentials.get_open_ai_api_key()
+        self.open_ai_client: OpenAIClient = OpenAIClient(api_key=api_key)
 
     def generate_completion(
         self, Image: torch.Tensor, prompt: str, max_tokens: int, model: str
@@ -103,6 +106,10 @@ class TextWithPrompt:
                     ],
                     {},
                 ),
+                "api_key": (
+                    "STRING",
+                    {"multiline": False, "default": ""},
+                ),
             }
         }
 
@@ -111,10 +118,9 @@ class TextWithPrompt:
 
     CATEGORY = "OpenAI"
 
-    def __init__(self):
-        self.open_ai_client: OpenAIClient = OpenAIClient(
-            api_key=credentials.get_open_ai_api_key()
-        )
+    def __init__(self, api_key: str = ""):
+        api_key = api_key or credentials.get_open_ai_api_key()
+        self.open_ai_client: OpenAIClient = OpenAIClient(api_key=api_key)
 
     def generate_completion(
         self, text: str, prompt: str, max_tokens: int, model: str
