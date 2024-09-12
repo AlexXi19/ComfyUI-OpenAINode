@@ -40,13 +40,16 @@ class ImageWithPrompt:
 
     CATEGORY = "OpenAI"
 
-    def __init__(self, api_key: str = ""):
+    def generate_completion(
+        self,
+        Image: torch.Tensor,
+        prompt: str,
+        max_tokens: int,
+        model: str,
+        api_key: str,
+    ) -> Tuple[str]:
         api_key = api_key or credentials.get_open_ai_api_key()
         self.open_ai_client: OpenAIClient = OpenAIClient(api_key=api_key)
-
-    def generate_completion(
-        self, Image: torch.Tensor, prompt: str, max_tokens: int, model: str
-    ) -> Tuple[str]:
         b64image = image.pil2base64(image.tensor2pil(Image))
         response = self.open_ai_client.chat.completions.create(
             model=model,
@@ -118,13 +121,11 @@ class TextWithPrompt:
 
     CATEGORY = "OpenAI"
 
-    def __init__(self, api_key: str = ""):
+    def generate_completion(
+        self, text: str, prompt: str, max_tokens: int, model: str, api_key: str
+    ) -> Tuple[str]:
         api_key = api_key or credentials.get_open_ai_api_key()
         self.open_ai_client: OpenAIClient = OpenAIClient(api_key=api_key)
-
-    def generate_completion(
-        self, text: str, prompt: str, max_tokens: int, model: str
-    ) -> Tuple[str]:
         response = self.open_ai_client.chat.completions.create(
             model=model,
             max_tokens=max_tokens,
