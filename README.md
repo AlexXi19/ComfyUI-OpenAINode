@@ -8,4 +8,5 @@ ComfyUI-OpenAINode is a user-friendly node that serves as an interface to the Op
 
 
 ## Configuration
-To utilize this node, you must set the `OPEN_AI_API_KEY` environment variable with your OpenAI API key. This ensures that the API is accessible and requests are authenticated properly.
+
+To utilize this node, you must set the OpenAI API key by setting the `OPEN_AI_API_KEY` environment variable or setting it in the text input. This ensures that the API is accessible and requests are authenticated properly. 
